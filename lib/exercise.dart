@@ -60,7 +60,6 @@ class ExercisePage extends StatefulWidget {
 }
 
 class _ExercisePageState extends State<ExercisePage> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,9 +71,11 @@ class _ExercisePageState extends State<ExercisePage> {
         backgroundColor: buttonColor,
         body: Center(
           child: CarouselSlider(
-            options: CarouselOptions(height: MediaQuery.of(context).size.height,
+            options: CarouselOptions(
+              height: MediaQuery.of(context).size.height,
               enableInfiniteScroll: false,
-              autoPlay: false,),
+              autoPlay: false,
+            ),
             items: exercises.map((i) {
               return Builder(
                 builder: (BuildContext context) {
@@ -88,7 +89,8 @@ class _ExercisePageState extends State<ExercisePage> {
     );
   }
 }
-List<Widget> exercises= [
+
+List<Widget> exercises = [
   ExerciseColumn(current: 0),
   ExerciseColumn(current: 1),
   ExerciseColumn(current: 2),
@@ -98,7 +100,8 @@ class ExerciseColumn extends StatelessWidget {
   const ExerciseColumn({
     Key? key,
     required int current,
-  }) : _current = current, super(key: key);
+  })  : _current = current,
+        super(key: key);
 
   final int _current;
 
@@ -111,8 +114,8 @@ class ExerciseColumn extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Container(
-              width: MediaQuery.of(context).size.width*0.7,
-              height: MediaQuery.of(context).size.height*0.3,
+              width: MediaQuery.of(context).size.width * 0.7,
+              height: MediaQuery.of(context).size.height * 0.3,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
@@ -124,7 +127,7 @@ class ExerciseColumn extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -135,7 +138,7 @@ class ExerciseColumn extends StatelessWidget {
                   )
                 ],
                 borderRadius: BorderRadius.all(
-                 Radius.circular(40),
+                  Radius.circular(40),
                 ),
                 color: Colors.white,
               ),
@@ -143,8 +146,7 @@ class ExerciseColumn extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                      padding:
-                      EdgeInsets.only(top: 25, left: 25, right: 25),
+                      padding: EdgeInsets.only(top: 25, left: 25, right: 25),
                       child: Column(
                         children: <Widget>[
                           Text(
@@ -153,7 +155,6 @@ class ExerciseColumn extends StatelessWidget {
                                 fontSize: 21, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 15),
-
                           SizedBox(height: 3),
                           Expanded(
                             child: SingleChildScrollView(
@@ -174,8 +175,13 @@ class ExerciseColumn extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 11),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.cyan,shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),minimumSize: Size(MediaQuery.of(context).size.width*0.3, MediaQuery.of(context).size.width*0.07)),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.cyan,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          minimumSize: Size(
+                              MediaQuery.of(context).size.width * 0.3,
+                              MediaQuery.of(context).size.width * 0.07)),
                       onPressed: () {},
                       child: Text("Done"),
                     ),
@@ -185,94 +191,7 @@ class ExerciseColumn extends StatelessWidget {
             ),
           ),
         ),
-
       ],
-    );
-  }
-}
-
-class ToDoList extends StatefulWidget {
-  const ToDoList({Key? key}) : super(key: key);
-
-  @override
-  _ToDoListState createState() => _ToDoListState();
-}
-
-class _ToDoListState extends State<ToDoList> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text('Deneme'),
-        centerTitle: true,
-      ),
-      body: Container(
-        child: ElevatedButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: bgcolor,
-                  title: Text('To-Do List'),
-                  content: Stack(
-                    clipBehavior: Clip.none,
-                    children: <Widget>[
-                      Positioned(
-                        right: -40.0,
-                        top: -80.0,
-                        child: InkResponse(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: CircleAvatar(
-                            child: Icon(Icons.close),
-                            backgroundColor: Colors.red,
-                          ),
-                        ),
-                      ),
-                      Form(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: 'Enter Course Name',
-                                  icon: Icon(Icons.local_activity_sharp),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: 'Enter the activity to do',
-                                  icon: Icon(Icons.description),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Save'),
-                      style: ElevatedButton.styleFrom(primary: buttonColor),
-                    )
-                  ],
-                );
-              },
-            );
-          },
-          child: Text("Open To-Do menu"),
-        ),
-      ),
     );
   }
 }
